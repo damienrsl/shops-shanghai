@@ -40,6 +40,14 @@ section>.etiquette{display:block;margin:0 4px 10px}
 .puce.on{color:#fff;border-color:transparent;background:linear-gradient(135deg,var(--bleu-chat),var(--bleu-renard));box-shadow:0 6px 16px -6px rgba(36,54,184,.6);transform:scale(1.04)}
 .bonus{display:none}
 body.long .bonus{display:block}
+.adr{margin:12px 0 0;padding:0;list-style:none}
+.adr li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 0;border-top:1px solid var(--filet)}
+.adr li:first-child{border-top:0;padding-top:4px}
+.adr .nom{font-size:14px;color:var(--texte-3)}
+.adr .zh{display:block;font-size:19px;color:var(--texte);font-weight:600;line-height:1.3}
+.copie{flex:none;font:600 13px var(--police);color:#fff;border:0;background:linear-gradient(135deg,var(--bleu-chat),var(--bleu-renard));padding:8px 14px;border-radius:999px;cursor:pointer}
+.copie.ok{background:var(--pan-3)}
+@media print{.copie{display:none}}
 .pied{font-size:12px;color:var(--texte-3);line-height:1.6;margin:40px 4px 0}
 .pied a{color:var(--texte-3)}
 @media print{.bonus{display:block}.puces{display:none}.auras,.orbe,.lis-progres{display:none!important}body{background:#fff!important}.verre,.sortie{background:#fff!important;box-shadow:none!important}}
@@ -70,6 +78,23 @@ body.long .bonus{display:block}
         <li><span class="an">21 H 45</span><h3>Taxi pour Pudong</h3><p>Une heure de route la nuit, 200 à 250 yuans. Le métro ne va plus à l'aéroport à cette heure. Commandez un Didi dans Alipay dix minutes avant.</p></li>
       </ul>
       <div class="franc">Si vous êtes à la bourre, sautez Zhangyuan. Arc'teryx est à quatre stations de métro de Huaihai, ligne 1 puis ligne 2 jusqu'à Jing'an Temple.</div>
+    </div>
+  </section>
+
+  <section>
+    <span class="etiquette">Adresses Didi</span>
+    <div class="verre carte">
+      <h2>À coller dans Didi, dans l'ordre</h2>
+      <p>Un bouton = l'adresse copiée. Dans Didi ou Alipay, colle dans « Où allez-vous ». Les shops d'une même rue sont à pied.</p>
+      <ul class="adr">
+        <li><div><span class="nom">1 · nanamica (si introuvable : 武康大楼, c'est à côté)</span><span class="zh">nanamica 武康路店</span></div><button class="copie" data-t="nanamica 武康路店">Copier</button></li>
+        <li><div><span class="nom">2 · Adidas Originals (Salomon est dans la même rue)</span><span class="zh">安福路322号</span></div><button class="copie" data-t="安福路322号">Copier</button></li>
+        <li><div><span class="nom">3 · Supreme</span><span class="zh">富民路291号</span></div><button class="copie" data-t="富民路291号">Copier</button></li>
+        <li><div><span class="nom">4 · New Balance Grey R (Uniqlo au 887, Haus Nowhere au 798, à pied)</span><span class="zh">淮海中路858号</span></div><button class="copie" data-t="淮海中路858号">Copier</button></li>
+        <li><div><span class="nom">5 · Zhangyuan, Palace et Carhartt</span><span class="zh">茂名北路280号 张园</span></div><button class="copie" data-t="茂名北路280号 张园">Copier</button></li>
+        <li><div><span class="nom">6 · Arc'teryx Museum</span><span class="zh">南京西路1717号 始祖鸟博物馆</span></div><button class="copie" data-t="南京西路1717号 始祖鸟博物馆">Copier</button></li>
+        <li><div><span class="nom">7 · Aéroport, 21 h 45 (terminal : vois ta carte d'embarquement)</span><span class="zh">浦东国际机场</span></div><button class="copie" data-t="浦东国际机场">Copier</button></li>
+      </ul>
     </div>
   </section>
 
@@ -194,6 +219,9 @@ body.long .bonus{display:block}
   <p class="pied"><a href="shops-shanghai.pdf">Télécharger la page en PDF</a> (à garder dans Fichiers, lisible sans réseau). Vérifié le 15 novembre 2026 sur Hypebeast, Jing Daily, Shanghai.gov.cn et les sites des marques. Horaires indicatifs, les shops ferment entre 21 h et 22 h.</p>
 </main>
 <script>
+document.querySelectorAll('.copie').forEach(function(b){b.addEventListener('click',function(){
+  navigator.clipboard.writeText(b.dataset.t).then(function(){b.textContent='Copié';b.classList.add('ok');setTimeout(function(){b.textContent='Copier';b.classList.remove('ok')},1500)});
+})});
 document.querySelectorAll('.puce').forEach(function(b){b.addEventListener('click',function(){
   document.querySelectorAll('.puce').forEach(function(x){x.classList.toggle('on',x===b)});
   var long=b.dataset.mode==='long';
